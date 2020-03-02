@@ -32,5 +32,5 @@ task zip(type: Zip) {
 build.dependsOn zip
 zip.dependsOn npm_build
 npm_build.dependsOn npm_test
-npm_test.dependsOn npmInstall
-npm_build.dependsOn npmInstall
+npm_test.dependsOn npm_install
+npm_build.dependsOn npm_install
