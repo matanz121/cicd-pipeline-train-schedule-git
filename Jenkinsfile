@@ -16,8 +16,8 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'webserver_login', usernameVariable: 'USERNAME', passwordVariable: 'USERPASS')]) {
                     sshPublisher(
-                        failOnError: false,
-                        continueOnError: true,
+                        failOnError: true,
+                        continueOnError: false,
                         publishers: [
                             sshPublisherDesc(
                                 configName: 'staging',
@@ -48,8 +48,8 @@ pipeline {
                 milestone(1)
                 withCredentials([usernamePassword(credentialsId: 'webserver_login', usernameVariable: 'USERNAME', passwordVariable: 'USERPASS')]) {
                     sshPublisher(
-                        failOnError: false,
-                        continueOnError: true,
+                        failOnError: true,
+                        continueOnError: false,
                         publishers: [
                             sshPublisherDesc(
                                 configName: 'production',
@@ -62,7 +62,7 @@ pipeline {
                                         sourceFiles: 'dist/trainSchedule.zip',
                                         removePrefix: 'dist/',
                                         remoteDirectory: 'tmp',
-                                        execCommand: 'sudo pm2 stop default && rm -rf /opt/traing-schedule/* && unzip /tmp/trainSchedule.zip -d /opt/train-schedule && sudo pm2 start /opt/train-schedule/bin/www'
+                                        execCommand: 'sudo unzip /tmp/trainSchedule.zip -d /opt/train-schedule && sudo pm2 start /opt/train-schedule/bin/www'
                                     )
                                 ]
                             )
