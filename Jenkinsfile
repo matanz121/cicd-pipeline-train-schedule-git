@@ -62,7 +62,7 @@ pipeline {
                                         sourceFiles: 'dist/trainSchedule.zip',
                                         removePrefix: 'dist/',
                                         remoteDirectory: 'tmp',
-                                        execCommand: 'sudo unzip /tmp/trainSchedule.zip -d /opt/train-schedule && sudo pm2 start /opt/train-schedule/bin/www'
+                                        execCommand: 'sudo pm2 stop default && sleep 5 && sudo rm -rf /opt/train-schedule/* && sudo unzip /tmp/trainSchedule.zip -d /opt/train-schedule && sudo pm2 start /opt/train-schedule/bin/www'
                                     )
                                 ]
                             )
